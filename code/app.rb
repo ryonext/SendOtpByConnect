@@ -12,7 +12,7 @@ def lambda_handler(event:, context:)
   otp = rand(100000..999999).to_s
 
   connect = Aws::Connect::Client.new
-  resp = connect.start_outbound_voice_contact(
+  connect.start_outbound_voice_contact(
     destination_phone_number: dest_number,
     contact_flow_id: cf_id,
     instance_id: instance_id,
@@ -21,4 +21,11 @@ def lambda_handler(event:, context:)
       OTP: otp
     }
   )
+
+  event[:response] = {
+    autoConfirmUser: false,
+    autoVerifyPhone: false,
+    autoVerifyEmail: false
+  }
+  event
 end

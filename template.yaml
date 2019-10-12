@@ -16,6 +16,15 @@ Resources:
       CodeUri: code/
       Handler: app.lambda_handler
       Runtime: ruby2.5
+      Policies:
+        - AmazonConnectFullAccess
+  UserPoolLambdaInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:invokeFunction
+      Principal: cognito-idp.amazonaws.com
+      FunctionName: !Ref SendOtpFunction
+      SourceArn: !Sub 'arn:aws:cognito-idp:${AWS::Region}:${AWS::AccountId}:userpool/*'
   SendOtpUserPool:
     Type: AWS::Cognito::UserPool
     Properties: 
@@ -27,6 +36,8 @@ Resources:
           RequireNumbers: false
           RequireSymbols: false
           RequireUppercase: false
+      LambdaConfig:
+        PreSignUp: !GetAtt SendOtpFunction.Arn
   SendOtpClient:
     Type: AWS::Cognito::UserPoolClient
     Properties: 
