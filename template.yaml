@@ -1,0 +1,40 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  SendOtpByConnect
+
+  Sample SAM Template for SendOtpByConnect
+
+Globals:
+  Function:
+    Timeout: 10
+
+Resources:
+  SendOtpFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: code/
+      Handler: app.lambda_handler
+      Runtime: ruby2.5
+  SendOtpUserPool:
+    Type: AWS::Cognito::UserPool
+    Properties: 
+      UserPoolName: SendOtpUserPool
+      Policies:
+        PasswordPolicy:
+          MinimumLength: 6
+          RequireLowercase: false
+          RequireNumbers: false
+          RequireSymbols: false
+          RequireUppercase: false
+  SendOtpClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties: 
+      ClientName: SendOtpClient
+      UserPoolId: !Ref SendOtpUserPool 
+
+Outputs:
+  UserPoolId: 
+    Value: !Ref SendOtpUserPool
+  ClientId: 
+    Value: !Ref SendOtpClient

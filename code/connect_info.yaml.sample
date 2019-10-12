@@ -1,0 +1,4 @@
+source_number: "+81XXXYYZZZZ"
+destination_number: "+81XXYYYYZZZZ"
+instance_id: "<your-connect-instance-id>"
+contact_flow_id: "<your-contact-flow-id>"

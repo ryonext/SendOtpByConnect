@@ -1,0 +1,5 @@
+var poolData = {
+  UserPoolId: 'xxx', // Your user pool id here
+  ClientId: 'yyy', // Your client id here
+};
+var phoneNumber = "+81XXYYYYZZZZ"
