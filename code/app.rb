@@ -29,3 +29,9 @@ def lambda_handler(event:, context:)
   }
   event
 end
+
+def create_otp
+  4.times.map {
+    rand(0..9).to_s
+  }.join
+end
