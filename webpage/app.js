@@ -25,6 +25,17 @@ $("#create-account").on("click", () => {
     }
     var cognitoUser = result.user;
     console.log('user name is ' + cognitoUser.getUsername());
+    $("#signup").replaceWith(`
+      <form id="OTP">
+        <div class="form-item">
+          <label for="otp"></label>
+          <input type="text" name="otp" required="required" placeholder="Your one time password"></input>
+        </div>
+        <div class="button-panel">
+          <input type="submit" class="button" title="Sign In" value="Send" id="send-otp"></input>
+        </div>
+      </form>
+      `);
   });
 });
 
