@@ -51,6 +51,34 @@ Resources:
     Properties: 
       ClientName: SendOtpClient
       UserPoolId: !Ref SendOtpUserPool 
+  ConfirmOtpFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: code_for_confirm_otp/
+      Handler: app.lambda_handler
+      Runtime: ruby2.5
+      Events: 
+        MyAPI:
+          Type: Api
+          Properties:
+            Path: /otp
+            Method: Post
+            RestApiId: !Ref ConfirmOtpApi
+      Policies:
+        - AmazonDynamoDBFullAccess
+        - AmazonCognitoPowerUser
+      Environment:
+        Variables:
+          UserPoolId: !Ref SendOtpUserPool
+  ConfirmOtpApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: prod
+      DefinitionBody:
+         Fn::Transform:
+           Name: AWS::Include
+           Parameters:
+             Location: swagger.yaml
 
 Outputs:
   UserPoolId: 

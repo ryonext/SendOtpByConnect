@@ -3,3 +3,4 @@ var poolData = {
   ClientId: 'yyy', // Your client id here
 };
 var phoneNumber = "+81XXYYYYZZZZ"
+var endpoint = "https://<api-id>.execute-api.<region>.amazonaws.com/Prod/otp"
