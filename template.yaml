@@ -18,6 +18,14 @@ Resources:
       Runtime: ruby2.5
       Policies:
         - AmazonConnectFullAccess
+        - AmazonDynamoDBFullAccess
+  CognitoOtpTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      TableName: CognitoOtpTable
+      PrimaryKey:
+        Name: username
+        Type: String
   UserPoolLambdaInvokePermission:
     Type: AWS::Lambda::Permission
     Properties:
@@ -49,3 +57,5 @@ Outputs:
     Value: !Ref SendOtpUserPool
   ClientId: 
     Value: !Ref SendOtpClient
+  TableName:
+    Value: !Ref CognitoOtpTable
