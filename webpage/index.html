@@ -7,24 +7,30 @@
   </head>
   <body>
     <div class="form-wrapper">
-      <h1>Sign In</h1>
-      <form>
-        <div class="form-item">
-          <label for="email"></label>
-          <input type="email" name="email" required="required" placeholder="Email Address"></input>
-        </div>
-        <div class="form-item">
-          <label for="password"></label>
-          <input type="password" name="password" required="required" placeholder="Password"></input>
-        </div>
-        <div class="button-panel">
-          <input type="submit" class="button" title="Sign In" value="Sign In"></input>
-        </div>
-      </form>
+      <div id="content">
+        <h1>Sign In</h1>
+        <form>
+          <div class="form-item">
+            <label for="username"></label>
+            <input type="text" id="username" name="username" required="required" placeholder="User name"></input>
+          </div>
+          <div class="form-item">
+            <label for="password"></label>
+            <input type="password" id="password" name="password" required="required" placeholder="Password"></input>
+          </div>
+          <div class="button-panel">
+            <input type="submit" id="sign-in" class="button" title="Sign In" value="Sign In"></input>
+          </div>
+        </form>
+      </div>
       <div class="form-footer">
         <p><a href="signup.html">Create an account</a></p>
         <p><a href="#">Forgot password?</a></p>
       </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="amazon-cognito-identity.min.js"></script>
+    <script type="text/javascript" src="config.js"></script>
+    <script type="text/javascript" src="app.js"></script>
   </body>
 </html>
