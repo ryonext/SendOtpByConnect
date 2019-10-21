@@ -52,18 +52,11 @@ $(document).on("click", "#send-otp", () => {
     contentType: 'application/json',
 
     success: (result, textStatus, xhr) => {
-      console.log(result);
-      console.log(textStatus);
-      console.log(xhr);
-      alert("success");
+      alert("Your account is confirmed.");
+      location.href="index.html"
     },
     error: (result, textStatus, xhr) => {
-      console.log(result);
-      console.log(textStatus);
-      console.log(xhr);
       alert("error");
     }
   });
 });
-
-
