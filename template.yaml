@@ -13,7 +13,7 @@ Resources:
   SendOtpFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: code/
+      CodeUri: code_for_send_otp/
       Handler: app.lambda_handler
       Runtime: ruby2.5
       Policies:

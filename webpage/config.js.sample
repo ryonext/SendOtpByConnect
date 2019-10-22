@@ -1,6 +1,6 @@
-var poolData = {
+const poolData = {
   UserPoolId: 'xxx', // Your user pool id here
   ClientId: 'yyy', // Your client id here
 };
-var phoneNumber = "+81XXYYYYZZZZ"
-var endpoint = "https://<api-id>.execute-api.<region>.amazonaws.com/Prod/otp"
+const phoneNumber = "+81XXYYYYZZZZ"
+const endpoint = "https://<api-id>.execute-api.<region>.amazonaws.com/Prod/otp"

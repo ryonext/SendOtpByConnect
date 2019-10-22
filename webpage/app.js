@@ -1,13 +1,13 @@
-var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 
 $("#create-account").on("click", () => {
-  var attributeList = [];
+  const attributeList = [];
 
-  var dataPhoneNumber = {
+  const dataPhoneNumber = {
     Name: 'phone_number',
     Value: phoneNumber,
   };
-  var attributePhoneNumber = new AmazonCognitoIdentity.CognitoUserAttribute(
+  const attributePhoneNumber = new AmazonCognitoIdentity.CognitoUserAttribute(
     dataPhoneNumber
   );
 
@@ -63,35 +63,36 @@ $(document).on("click", "#send-otp", () => {
 
 $("#sign-in").on("click", (e) => {
   e.preventDefault();
-  var authenticationData = {
+  const authenticationData = {
       Username : $("#username").val(),
       Password : $("#password").val(),
   };
-  var authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
-  var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
-  var userData = {
+  const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
+  const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+  const userData = {
     Username : authenticationData.Username,
     Pool : userPool
   };
-  var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+  const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
   cognitoUser.authenticateUser(authenticationDetails, {
-    onSuccess: function (result) {
-      var accessToken = result.getAccessToken().getJwtToken();
+    onSuccess: (result) => {
+      const accessToken = result.getAccessToken().getJwtToken();
       
       /* Use the idToken for Logins Map when Federating User Pools with identity pools or when passing through an Authorization Header to an API Gateway Authorizer*/
-      var idToken = result.idToken.jwtToken;
-      var refreshToken = result.refreshToken.token;
+      const idToken = result.idToken.jwtToken;
+      const refreshToken = result.refreshToken.token;
       console.log(result);
       $("#content").replaceWith(`
-        <p>ID Token</p>
+        <h1>Login succeeded.</h1>
+        <h2>ID Token</h2>
         <p>${idToken}</p>
-        <p>Access Token</p>
+        <h2>Access Token</h2>
         <p>${accessToken}</p>
-        <p>Refresh Token</p>
+        <h2>Refresh Token</h2>
         <p>${refreshToken}</p>
       `);
     },
-    onFailure: function(err) {
+    onFailure: (err) => {
       console.log(err);
     }
   });
