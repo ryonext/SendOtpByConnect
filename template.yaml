@@ -20,12 +20,19 @@ Resources:
         - AmazonConnectFullAccess
         - AmazonDynamoDBFullAccess
   CognitoOtpTable:
-    Type: AWS::Serverless::SimpleTable
+    Type: AWS::DynamoDB::Table
     Properties:
       TableName: CognitoOtpTable
-      PrimaryKey:
-        Name: username
-        Type: String
+      BillingMode: PAY_PER_REQUEST
+      KeySchema:
+        - AttributeName: username
+          KeyType: HASH
+      AttributeDefinitions:
+        - AttributeName: username
+          AttributeType: S
+      TimeToLiveSpecification: 
+        AttributeName: ttl 
+        Enabled: true
   UserPoolLambdaInvokePermission:
     Type: AWS::Lambda::Permission
     Properties:

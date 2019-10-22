@@ -2,6 +2,7 @@ require 'json'
 require 'aws-sdk-connect'
 require 'aws-sdk-dynamodb'
 require 'yaml'
+require 'time'
 
 def lambda_handler(event:, context:)
   print(event);
@@ -15,6 +16,7 @@ def lambda_handler(event:, context:)
 
   # DDB に OTP を入れる
   table = Aws::DynamoDB::Table.new("CognitoOtpTable")
+  ttl = (Time.now + 300).to_i
   table.update_item(
     key: {
       username: event["userName"]
@@ -22,6 +24,10 @@ def lambda_handler(event:, context:)
     attribute_updates: {
       otp: {
         value: otp,
+        action: "PUT"
+      },
+      ttl: {
+        value: ttl,
         action: "PUT"
       }
     }
