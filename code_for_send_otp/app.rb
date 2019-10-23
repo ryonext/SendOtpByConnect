@@ -5,12 +5,13 @@ require 'yaml'
 require 'time'
 
 def lambda_handler(event:, context:)
-  print(event);
+  p (event)
   yaml = YAML.load_file("./connect_info.yaml")
   source_number = yaml["source_number"] 
-  dest_number = yaml["destination_number"] 
   instance_id = yaml["instance_id"]
   cf_id = yaml["contact_flow_id"]
+  dest_number = event["request"]["userAttributes"]["phone_number"] 
+  p (dest_number)
 
   otp = create_otp
 

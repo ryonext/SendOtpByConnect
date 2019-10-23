@@ -1,21 +1,20 @@
 const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 
-$("#create-account").on("click", () => {
+$("#create-account").on("click", (e) => {
+  e.preventDefault();
+
   const attributeList = [];
+  const username = $("#username").val();
+  const password = $("#password").val();
 
   const dataPhoneNumber = {
     Name: 'phone_number',
     Value: phoneNumber,
   };
-  const attributePhoneNumber = new AmazonCognitoIdentity.CognitoUserAttribute(
-    dataPhoneNumber
-  );
-
+  const attributePhoneNumber = new AmazonCognitoIdentity.CognitoUserAttribute(dataPhoneNumber);
   attributeList.push(attributePhoneNumber);
 
-  username = Math.random().toString(32).substring(2);
-
-  userPool.signUp(username, 'password', attributeList, null, function (
+  userPool.signUp(username, password, attributeList, null, function (
     err,
     result
   ) {
